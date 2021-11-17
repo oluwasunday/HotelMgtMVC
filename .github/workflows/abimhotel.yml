@@ -1,0 +1,19 @@
+name: abim hotel
+on:
+  pull_request:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: abimhotel
+      env:
+        HEROKU_API_KEY: a5c86878-47c0-4e76-a467-59b60de9dd74
+        APP_NAME: abimhotel
+      run: |
+        docker build -t abimhotel .
+        docker tag abimhotel registry.heroku.com
+        docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+        heroku container:push web -a $APP_NAME
+        heroku container:release web -a $APP_NAME
