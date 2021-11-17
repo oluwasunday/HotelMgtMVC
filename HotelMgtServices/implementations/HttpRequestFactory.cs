@@ -1,0 +1,74 @@
+﻿using HotelMgtModel.Dtos.AuthDtos;
+using HotelMgtModel.Utilities;
+using HotelMgtServices.interfaces;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HotelMgtServices.implementations
+{
+    public class HttpRequestFactory : IHttpRequestFactory
+    {
+        private readonly IHttpClientFactory _clientFactory;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IWebHostEnvironment _web;
+        private string _url;
+        public HttpRequestFactory(IHttpClientFactory clientFactory, IConfiguration configuration, IHttpContextAccessor httpContextAccessor, IWebHostEnvironment web)
+        {
+            _clientFactory = clientFactory;
+            _httpContextAccessor = httpContextAccessor;
+            _web = web;
+            _url = _web.IsDevelopment() ? configuration["BaseUrl"] : configuration["HerokuUrl"];
+        }
+
+        public async Task<TRes> GetRequestAsync<TRes>(string requestUrl, string baseUrl = null) where TRes : class
+        {
+            var client = CreateClient(baseUrl);
+            var request = new HttpRequestMessage(HttpMethod.Get, requestUrl);
+            return await GetResponseResultAsync<TRes>(client, request);
+        }
+
+        public async Task<TRes> PostRequestAsync<TReq, TRes>(string requestUrl, TReq content, string baseUrl = null) where TRes : class where TReq : class
+        {
+            var client = CreateClient(baseUrl);
+            var reqContent = new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
+            var request = new HttpRequestMessage(HttpMethod.Post, requestUrl) { Content = reqContent };
+            return await GetResponseResultAsync<TRes>(client, request);
+        }
+
+        private async Task<TRequest> GetResponseResultAsync<TRequest>(HttpClient client, HttpRequestMessage request) where TRequest : class
+        {
+            var response = await client.SendAsync(request);
+            var responseString = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<TRequest>(responseString);
+            return result;
+        }
+
+
+        private HttpClient CreateClient(string baseUrl = null)
+        {
+            baseUrl ??= _url;
+            var client = _clientFactory.CreateClient();
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.BaseAddress = new Uri(baseUrl);
+            var token = _httpContextAccessor.HttpContext.Session.GetString("access_token");
+
+            if (!string.IsNullOrEmpty(token))
+            {
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            }
+            return client;
+        }
+    }
+}

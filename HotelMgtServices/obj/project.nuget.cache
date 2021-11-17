@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "tAdR2wPLPb3AhLqYr7fzRNDPDVMbvu8RnyD6YD1gqK92NP2Ofh2R1v4HayS0KTPLNVfFMhjzIGehu7UIeZhh/w==",
+  "dgSpecHash": "wvFdzYeZTPLljR48JFsoRfM4xihq4SkQV4CUiLGceKA5ALpmXR+qmBbYCBQDZphEZpxZstVmLIKHs96QxSGZQg==",
   "success": true,
   "projectFilePath": "C:\\Users\\hp\\OneDrive\\Documents\\Portfolio\\HotelMgtMVC\\HotelMgtServices\\HotelMgtServices.csproj",
   "expectedPackageFiles": [
@@ -36,6 +36,7 @@
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\5.0.0\\microsoft.extensions.fileproviders.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.extensions.fileproviders.embedded\\5.0.12\\microsoft.extensions.fileproviders.embedded.5.0.12.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.extensions.hosting.abstractions\\2.2.0\\microsoft.extensions.hosting.abstractions.2.2.0.nupkg.sha512",
+    "C:\\Users\\hp\\.nuget\\packages\\microsoft.extensions.http\\5.0.0\\microsoft.extensions.http.5.0.0.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.extensions.identity.core\\5.0.12\\microsoft.extensions.identity.core.5.0.12.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.extensions.identity.stores\\5.0.12\\microsoft.extensions.identity.stores.5.0.12.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.extensions.logging\\5.0.0\\microsoft.extensions.logging.5.0.0.nupkg.sha512",

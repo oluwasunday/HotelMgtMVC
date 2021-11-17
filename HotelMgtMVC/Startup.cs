@@ -1,3 +1,4 @@
+using HotelMgtMVC.extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,6 +25,14 @@ namespace HotelMgtMVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddHttpContextAccessor(); // configure httpcontext to be accessible in other class
+            services.AddHttpClient(); // configure httpclient for request to apis
+            services.AddSession();
+
+            // add dependecy injection
+            services.AddDependencyInjection();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +50,8 @@ namespace HotelMgtMVC
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseRouting();
 
