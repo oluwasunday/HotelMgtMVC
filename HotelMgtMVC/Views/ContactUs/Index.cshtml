@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<!--================Breadcrumb Area =================-->
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">Contact Us</h2>
+            <ol class="breadcrumb">
+                <li><a asp-controller="ContactUs">Home</a></li>
+                <li class="active">Contact</li>
+            </ol>
+        </div>
+    </div>
+</section>
+<!--================Breadcrumb Area =================-->
+        <div class="row mt-1">
+            <div class="col-md-12">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.3638031816645!2d3.629343214689239!3d6.846917995051849!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103bdba34a67ce69%3A0x54aed112930f89dc!2sMolaroid%20Hotels!5e0!3m2!1sen!2sng!4v1637107394502!5m2!1sen!2sng" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+<!--================ About History Area  =================-->
+<section class="about_history_area section_gap">
+        
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 d-block align-content-center">
+                <h1 style="font-size:50px; align-content:center;">If you have any questions don't hesitate to contact us.</h1>
+            </div>
+        </div>
+       
+        <div class="row">
+            <div class="col-md-6 d-block ">
+                <div class="about_content ">
+                    <form asp-action="" method="post">
+                      <fieldset>
+                        
+                        
+                        <div class="form-group">
+                          <label for="exampleInputEmail1" class="form-label mt-3">Email address</label>
+                          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                          <label for="Name" class="form-label mt-3">Name</label>
+                          <input for="Name" type="text" class="form-control" id="name" placeholder="Enter name">
+                        </div>
+                        
+                        <div class="form-group">
+                          <label for="Message" class="form-label mt-3">Message</label>
+                          <textarea for="Message" class="form-control" id="message" rows="3"placeholder="Enter your message"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-dark">Submit</button>
+                      </fieldset>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img class="img-fluid" src="~/main/image/about_bg.jpg" alt="img">
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ About History Area  =================-->
