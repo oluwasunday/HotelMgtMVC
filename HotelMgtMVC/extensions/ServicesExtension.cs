@@ -12,6 +12,7 @@ namespace HotelMgtMVC.extensions
             // Add Repository Injections Here 
             services.AddSingleton<IHttpRequestFactory, HttpRequestFactory>();
             services.AddTransient<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IContactService, ContactService>();
 
 
             // Add Fluent Validator Injections Here
