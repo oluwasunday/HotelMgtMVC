@@ -1,4 +1,5 @@
-﻿@{
+﻿@model HotelMgtModel.ViewModels.HomeViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
         
@@ -94,58 +95,32 @@
                     <p>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast, </p>
                 </div>
                 <div class="row mb_30">
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="accomodation_item text-center">
-                            <div class="hotel_img">
-                                <img src="~/main/image/room1.jpg" alt="">
-                                <a href="#" class="btn theme_btn button_hover">Book Now</a>
+                    @foreach(var item in Model.RoomTypes){
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="accomodation_item text-center">
+                                <div class="hotel_img">
+                                    <img src="@item.Thumbnail" style="height:300px; width:100%" alt="">
+                                    <a asp-controller="Accomodation" asp-action="RoomDetails" asp-route-roomTypeId="@item.Id" class="btn theme_btn button_hover">MORE</a>
+                                </div>
+                                <a asp-controller="Accomodation" asp-action="RoomDetails" asp-route-roomTypeId="@item.Id"><h4 class="sec_h4">@item.Name</h4></a>
+                                <h5>N@{@item.Price.ToString("N0")}<small>/night</small></h5>
                             </div>
-                            <a href="#"><h4 class="sec_h4">Double Deluxe Room</h4></a>
-                            <h5>$250<small>/night</small></h5>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="accomodation_item text-center">
-                            <div class="hotel_img">
-                                <img src="~/main/image/room2.jpg" alt="">
-                                <a href="#" class="btn theme_btn button_hover">Book Now</a>
-                            </div>
-                            <a href="#"><h4 class="sec_h4">Single Deluxe Room</h4></a>
-                            <h5>$200<small>/night</small></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="accomodation_item text-center">
-                            <div class="hotel_img">
-                                <img src="~/main/image/room3.jpg" alt="">
-                                <a href="#" class="btn theme_btn button_hover">Book Now</a>
-                            </div>
-                            <a href="#"><h4 class="sec_h4">Honeymoon Suit</h4></a>
-                            <h5>$750<small>/night</small></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="accomodation_item text-center">
-                            <div class="hotel_img">
-                                <img src="~/main/image/room4.jpg" alt="">
-                                <a href="#" class="btn theme_btn button_hover">Book Now</a>
-                            </div>
-                            <a href="#"><h4 class="sec_h4">Economy Double</h4></a>
-                            <h5>$200<small>/night</small></h5>
-                        </div>
-                    </div>
+                    }
+
+
                 </div>
             </div>
         </section>
         <!--================ Accomodation Area  =================-->
         
-        <!--================ Facilities Area  =================-->
+        <!--================ Amenities Area  =================-->
         <section class="facilities_area section_gap">
             <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background="">  
             </div>
             <div class="container">
                 <div class="section_title text-center">
-                    <h2 class="title_w">Royal Facilities</h2>
+                    <h2 class="title_w">Amenities</h2>
                     <p>Who are in extremely love with eco friendly system.</p>
                 </div>
                 <div class="row mb_30">
@@ -157,38 +132,39 @@
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="facilities_item">
-                            <h4 class="sec_h4"><i class="lnr lnr-bicycle"></i>Sports CLub</h4>
+                            @*<h4 class="sec_h4"><i class="lnr lnr-bicycle"></i>Fast Internet Speed</h4>*@
+                            <h4 class="sec_h4"><i class="fal fa-broadcast-tower"></i>Fast Internet Speed</h4>
                             <p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="facilities_item">
                             <h4 class="sec_h4"><i class="lnr lnr-shirt"></i>Swimming Pool</h4>
-                            <p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+                            <p>Well clean pool design, maintenained, hygiene and for outdoor living inspiration.</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="facilities_item">
                             <h4 class="sec_h4"><i class="lnr lnr-car"></i>Rent a Car</h4>
-                            <p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+                            <p>Exotic cars available for rentage, attract addintional money.</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="facilities_item">
                             <h4 class="sec_h4"><i class="lnr lnr-construction"></i>Gymnesium</h4>
-                            <p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+                            <p>Our well-equipped gym with sauna rooms are accessible to our in-house fit fam junkies, and comes with an available instructor.</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="facilities_item">
                             <h4 class="sec_h4"><i class="lnr lnr-coffee-cup"></i>Bar</h4>
-                            <p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+                            <p>You are cordially invited to experience relaxing bar anytime. Our variety of pampering sessions guarantee a memorable stay with us.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!--================ Facilities Area  =================-->
+        <!--================ Amenities Area  =================-->
         
         <!--================ About History Area  =================-->
         <section class="about_history_area section_gap">
@@ -209,7 +185,7 @@
         </section>
         <!--================ About History Area  =================-->
         
-        <!--================ Testimonial Area  =================-->
+        <!--================ Rating Area  =================-->
         <section class="testimonial_area section_gap">
             <div class="container">
                 <div class="section_title text-center">
@@ -217,25 +193,16 @@
                     <p>The French Revolution constituted for the conscience of the dominant aristocratic class a fall from </p>
                 </div>
                 <div class="testimonial_slider owl-carousel">
+
+
+                @foreach(var item in Model.Ratings)
+                {
                     <div class="media testimonial_item">
                         <img class="rounded-circle" src="~/main/image/testtimonial-1.jpg" alt="">
                         <div class="media-body">
-                            <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If you think about it, you travel across her face, and She is the </p>
-                            <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
-                            <div class="star">
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star-half-o"></i></a>
-                            </div>
-                        </div>
-                    </div>    
-                    <div class="media testimonial_item">
-                        <img class="rounded-circle" src="image/testtimonial-1.jpg" alt="">
-                        <div class="media-body">
-                            <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If you think about it, you travel across her face, and She is the </p>
-                            <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
+                            <p>@item.Comment</p>
+                            <p>@item.Ratings</p>
+                            <h4 class="sec_h4">@item.CustomerId</h4>
                             <div class="star">
                                 <a href="#"><i class="fa fa-star"></i></a>
                                 <a href="#"><i class="fa fa-star"></i></a>
@@ -245,41 +212,18 @@
                             </div>
                         </div>
                     </div>
-                    <div class="media testimonial_item">
-                        <img class="rounded-circle" src="~/main/image/testtimonial-1.jpg" alt="">
-                        <div class="media-body">
-                            <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If you think about it, you travel across her face, and She is the </p>
-                            <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
-                            <div class="star">
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star-half-o"></i></a>
-                            </div>
-                        </div>
-                    </div>    
-                    <div class="media testimonial_item">
-                        <img class="rounded-circle" src="~/main/image/testtimonial-1.jpg" alt="">
-                        <div class="media-body">
-                            <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If you think about it, you travel across her face, and She is the </p>
-                            <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
-                            <div class="star">
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star-half-o"></i></a>
-                            </div>
-                        </div>
-                    </div>
+                }
+
+
+
+                   
                 </div>
             </div>
         </section>
-        <!--================ Testimonial Area  =================-->
+        <!--================ Rating Area  =================-->
         
         <!--================ Latest Blog Area  =================-->
-        <section class="latest_blog_area section_gap">
+        @* <section class="latest_blog_area section_gap">
             <div class="container">
                 <div class="section_title text-center">
                     <h2 class="title_color">latest posts from blog</h2>
@@ -336,5 +280,5 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section>*@
         <!--================ Recent Area  =================-->
