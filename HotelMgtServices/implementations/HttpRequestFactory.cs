@@ -46,6 +46,22 @@ namespace HotelMgtServices.implementations
             return await GetResponseResultAsync<TRes>(client, request);
         }
 
+        public async Task<TRes> UpdateRequestAsync<TReq, TRes>(string requestUrl, TReq content, string baseUrl = null) where TRes : class where TReq : class
+        {
+            var client = CreateClient(baseUrl);
+            var reqContent = new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
+            var request = new HttpRequestMessage(HttpMethod.Patch, requestUrl) { Content = reqContent };
+            return await GetResponseResultAsync<TRes>(client, request);
+        }
+
+        public async Task<TRes> DeleteRequestAsync<TRes>(string requestUrl, string baseUrl = null) where TRes : class
+        {
+            var client = CreateClient(baseUrl);
+            var request = new HttpRequestMessage(HttpMethod.Delete, requestUrl);
+            return await GetResponseResultAsync<TRes>(client, request);
+        }
+
+
         private async Task<TRequest> GetResponseResultAsync<TRequest>(HttpClient client, HttpRequestMessage request) where TRequest : class
         {
             var response = await client.SendAsync(request);

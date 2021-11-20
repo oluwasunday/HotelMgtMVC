@@ -1,7 +1,12 @@
-﻿@model HotelMgtModel.ViewModels.AccomodationViewModel
+﻿@model HotelMgtModel.ViewModels.RoomTypeDetailsViewModel
 @{
-    ViewData["Title"] = "Accomodation";
+    ViewData["Title"] = "Details";
 }
+
+<h1>Room Details</h1>
+
+
+
 
         
 <!--================Breadcrumb Area =================-->
@@ -18,6 +23,45 @@
     </div>
 </section>
 <!--================Breadcrumb Area =================-->
+
+
+
+<!--================ Bigger RoomType Area  =================-->
+<section class="accomodation_area section_gap">
+    <div class="container">
+        <div class="section_title text-center">
+            <h2 class="title_color">Special Room Categories</h2>
+            <p>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast,</p>
+        </div>
+        <div class="row mb_30">
+
+            
+                <div class="col-md-9 col-sm-6">
+                    <div class="accomodation_item text-center">
+                        <div class="hotel_img">
+                            <img src="@Model.RoomType.Thumbnail" style="width:100%" alt="">
+                            <a href="#" class="btn theme_btn button_hover">Book Now</a>
+                        </div>
+                        <h4 class="sec_h4">@Model.RoomType.Name</h4>
+                        <h5>N@{@Model.RoomType.Price.ToString("N0")}<small>/night</small></h5>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-3">
+                    <div class="accomodation_item text-center">
+                        <h2>Amenities</h2>
+                        
+                    </div>
+                </div>
+            
+            
+        </div>
+    </div>
+</section>
+<!--================ Bigger RoomType Area  =================-->
+
+
+
         
 <!--================ Accomodation Area  =================-->
 <section class="accomodation_area section_gap">
@@ -28,14 +72,14 @@
         </div>
         <div class="row mb_30">
 
-            @foreach(var item in Model.RoomTypes){
-                <div class="col-lg-3 col-sm-6">
+            @foreach(var item in Model.Rooms){
+                <div class="col-md-6 col-sm-6">
                     <div class="accomodation_item text-center">
                         <div class="hotel_img">
-                            <img src="@item.Thumbnail" style="height:300px; width:100%" alt="">
-                            <a asp-controller="Accomodation" asp-action="RoomDetails" asp-route-roomTypeId="@item.Id" class="btn theme_btn button_hover">Details</a>
+                            <img src="@item.ImageUrl" style="height:300px; width:100%" alt="">
+                            <a href="#" class="btn theme_btn button_hover">Book Now</a>
                         </div>
-                        <a asp-controller="Accomodation" asp-action="RoomDetails" asp-route-roomTypeId="@item.Id"><h4 class="sec_h4">@item.Name</h4></a>
+                        <a href="#"><h4 class="sec_h4">@item.RoomNo</h4></a>
                         <h5>N@{@item.Price.ToString("N0")}<small>/night</small></h5>
                     </div>
                 </div>
@@ -144,3 +188,4 @@
     </div>
 </section>
 <!--================ Accomodation Area  =================-->
+
