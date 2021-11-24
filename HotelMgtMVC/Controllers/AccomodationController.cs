@@ -30,9 +30,15 @@ namespace HotelMgtMVC.Controllers
         {
             var roomType = await _roomTypeService.GetRoomTypeByIdAsync(roomTypeId);
             var rooms = await _roomService.GetRoomByRoomTypeIdAsync(roomTypeId);
+            var amenities = await _roomTypeService.GetAmenitiesForRoomTypeIdAsync(roomTypeId);
 
-            var accVm = new RoomTypeDetailsViewModel() { RoomType = roomType, Rooms = rooms.ToList() };
+            var accVm = new RoomTypeDetailsViewModel() { RoomType = roomType, Rooms = rooms.ToList(), Amenities = amenities.ToList() };
             return View(accVm);
+        }
+
+        public IActionResult Book()
+        {
+            return View();
         }
     }
 }

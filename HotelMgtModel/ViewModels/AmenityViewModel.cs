@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelMgtModel.Dtos
+namespace HotelMgtModel.ViewModels
 {
-    public class AmenityDto
+    public class AmenityViewModel
     {
         public string Id { get; set; }
         public string Name { get; set; }

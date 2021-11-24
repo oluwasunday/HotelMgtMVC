@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 
 namespace HotelMgtModel.ViewModels
@@ -12,6 +13,6 @@ namespace HotelMgtModel.ViewModels
         public string Password { get; set; }
         public string Id { get; set; }
         public string Token { get; set; }
-        public Claim Claim { get; set; }
+        public IEnumerable<Claim> Claims { get; set; }
     }
 }

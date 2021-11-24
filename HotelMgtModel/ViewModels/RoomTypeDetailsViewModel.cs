@@ -11,5 +11,6 @@ namespace HotelMgtModel.ViewModels
     {
         public RoomTypeDto RoomType { get; set; }
         public ICollection<RoomDto> Rooms { get; set; }
+        public ICollection<AmenityDto> Amenities { get; set; }
     }
 }

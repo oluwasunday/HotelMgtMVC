@@ -1,7 +1,23 @@
-﻿
+﻿@using HotelMgtModel.Dtos.AuthDtos
+@using Microsoft.AspNetCore.Http;
+@using Newtonsoft.Json;
+
 @{
-    ViewData["Title"] = "Index";
-}
+    var loggedinUser = Context.Session.GetString("User");
+    var user = loggedinUser != null? JsonConvert.DeserializeObject<AuthenticatedUserDto>(loggedinUser) : null;
+
+    ViewData["Title"] = "Contact";
+
+    if(user == null)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_UserLayout.cshtml";
+    }
+} 
+
 
 <h1>Index</h1>
 

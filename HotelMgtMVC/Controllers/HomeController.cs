@@ -1,8 +1,11 @@
-﻿using HotelMgtModel.ViewModels;
+﻿using HotelMgtModel.Dtos.AuthDtos;
+using HotelMgtModel.ViewModels;
 using HotelMgtMVC.Models;
 using HotelMgtServices.interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -29,7 +32,22 @@ namespace HotelMgtMVC.Controllers
             var roomTypes = await _roomTypeService.GetRoomTypesAsync();
             var ratings = await _ratingService.GetRatingsAsync();
 
-            var homeVm = new HomeViewModel() { RoomTypes = roomTypes.ToList(), Ratings = ratings.ToList()};
+            var authenticatedUser = HttpContext.Session.GetString("User");
+            var user = authenticatedUser != null ? JsonConvert.DeserializeObject<AuthenticatedUserDto>(authenticatedUser) : null;
+
+            var homeVm = new HomeViewModel() { RoomTypes = roomTypes.ToList(), Ratings = ratings.ToList(), AuthUser = user};
+            return View(homeVm);
+        }
+
+        public async Task<IActionResult> Dashboard()
+        {
+            var roomTypes = await _roomTypeService.GetRoomTypesAsync();
+            var ratings = await _ratingService.GetRatingsAsync();
+
+            var authenticatedUser = HttpContext.Session.GetString("User");
+            var user = authenticatedUser != null ? JsonConvert.DeserializeObject<AuthenticatedUserDto>(authenticatedUser) : null;
+
+            var homeVm = new HomeViewModel() { RoomTypes = roomTypes.ToList(), Ratings = ratings.ToList(), AuthUser = user };
             return View(homeVm);
         }
 
