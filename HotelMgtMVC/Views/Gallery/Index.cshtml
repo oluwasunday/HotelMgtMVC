@@ -1,7 +1,22 @@
-﻿
+﻿@using HotelMgtModel.Dtos.AuthDtos
+@using Microsoft.AspNetCore.Http;
+@using Newtonsoft.Json;
+
 @{
+    var loggedinUser = Context.Session.GetString("User");
+    var user = loggedinUser != null? JsonConvert.DeserializeObject<AuthenticatedUserDto>(loggedinUser) : null;
+
     ViewData["Title"] = "Gallery";
-}
+
+    if(user == null)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_UserLayout.cshtml";
+    }
+} 
 
 <!--================Breadcrumb Area =================-->
 <section class="breadcrumb_area">

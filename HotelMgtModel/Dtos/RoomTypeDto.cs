@@ -16,6 +16,7 @@ namespace HotelMgtModel.Dtos
         public string Thumbnail { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        public string Amenity { get; set; }
         public ICollection<RoomDto> Rooms { get; set; }
         public ICollection<AmenityDto> Amenities { get; set; }
     }

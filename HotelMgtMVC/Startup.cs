@@ -33,6 +33,9 @@ namespace HotelMgtMVC
             // add dependecy injection
             services.AddDependencyInjection();
 
+
+            services.ConfigureApplicationCookie(opt => opt.LoginPath = "/Authentication/Login");
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,11 +54,12 @@ namespace HotelMgtMVC
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseSession();
 
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

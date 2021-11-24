@@ -1,26 +1,11 @@
 ﻿@using System.Globalization
 @model HotelMgtModel.ViewModels.HomeViewModel
-@using HotelMgtModel.Dtos.AuthDtos
-@using Microsoft.AspNetCore.Http;
-@using Newtonsoft.Json;
-
 @{
-    var loggedinUser = Context.Session.GetString("User");
-    var user = loggedinUser != null? JsonConvert.DeserializeObject<AuthenticatedUserDto>(loggedinUser) : null;
-
-    ViewData["Title"] = "Home";
-
-    if(user == null)
-    {
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
-    else
-    {
-        Layout = "~/Views/Shared/_UserLayout.cshtml";
-    }
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
-        
-        <!--================Banner Area =================-->
+
+<!--================Banner Area =================-->
         <section class="banner_area">
             <div class="booking_table d_flex align-items-center">
             	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
