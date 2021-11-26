@@ -115,13 +115,15 @@
             </div>
             <div class="col-md-9">
                 <div class="boking_table">
-                    <form method="post" asp-action="">
+                    
+                    <div class="text-danger" asp-validation-summary="All"></div>
+                    <form method="post" asp-action="Book">
                         <div class="row">
                                 <div class="col-md-4">
                                     <div class="book_tabel_item">
                                         <div class="form-group">
                                             <div class='input-group date' id='datetimepicker11'>
-                                                <input type='text' class="form-control" placeholder="CheckIn Date"/>
+                                                <input type='text' class="form-control" name="CheckIn" placeholder="CheckIn Date"/>
                                                 <span class="input-group-addon">
                                                     <i class="fa fa-calendar" aria-hidden="true"></i>
                                                 </span>
@@ -129,7 +131,7 @@
                                         </div>
                                         <div class="form-group">
                                             <div class='input-group date' id='datetimepicker1'>
-                                                <input type='text' class="form-control" placeholder="CheckOut Date"/>
+                                                <input type='text' class="form-control" name="CheckOut" placeholder="CheckOut Date"/>
                                                 <span class="input-group-addon">
                                                     <i class="fa fa-calendar" aria-hidden="true"></i>
                                                 </span>
@@ -140,7 +142,7 @@
                                 <div class="col-md-4">
                                     <div class="book_tabel_item">
                                         <div class="input-group">
-                                            <select class="wide">
+                                            <select class="wide" name="NoOfPeople">
                                                 <option data-display="Number of people">Number of people</option>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
@@ -155,11 +157,11 @@
                                             </select>
                                         </div>
                                         <div class="input-group">
-                                            <select class="wide">
+                                            <select class="wide" name="ServiceName">
                                                 <option data-display="Service Name">Service Name</option>
                                                 <option value="Room" selected>Room</option>
                                                 <option value="Hall">Hall</option>
-                                                <option value="3"> </option>
+                                                @*<option value="3"></option>*@
                                             </select>
                                         </div>
                                     </div>
@@ -167,7 +169,7 @@
                                 <div class="col-md-4">
                                     <div class="book_tabel_item">
                                         <div class="input-group">
-                                            <select class="wide">
+                                            <select class="wide" name="RoomNo">
                                                 <option data-display="Room-Number">Room Number</option>
 
                                                 @foreach(var item in Model.Rooms){
@@ -178,7 +180,7 @@
 
                                             </select>
                                         </div>
-                                        <a class="book_now_btn button_hover" href="#">Book Now</a>
+                                        <button class="book_now_btn button_hover" type="submit">Book Now</button>
                                     </div>
                                 </div>
                         </div>

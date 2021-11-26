@@ -3,6 +3,7 @@ using HotelMgtServices.interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -95,8 +96,13 @@ namespace HotelMgtMVC.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
+            Response.Cookies.Delete("HotelUser");
+            Response.Cookies.Delete("User");
+            if (Request.Cookies["HotelUser"] != null)
+            {
+                Response.Cookies.Delete("HotelUser");
+            }
             HttpContext.Session.Remove("User");
-            //HttpContext.Session.Abandon();
             return RedirectToAction("Login", "Authentication");
         }
     }

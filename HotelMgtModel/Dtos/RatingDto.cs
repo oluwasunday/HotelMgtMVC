@@ -14,6 +14,8 @@ namespace HotelMgtModel.Dtos
         public string CustomerId { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        public string Avatar { get; set; }
+        public string AppUserName { get; set; }
         public CustomerDto Customer { get; set; }
     }
 }
