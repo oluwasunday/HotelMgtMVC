@@ -35,7 +35,7 @@ namespace HotelMgtServices.implementations
                 _httpContextAccessor.HttpContext.Session.SetString("user", JsonConvert.SerializeObject(result));
                 JwtSecurityToken decodedValue = handler.ReadJwtToken(result.Data.Token);
 
-                result.Data.Claim = decodedValue.Claims.ElementAt(5);
+                result.Data.Claims = decodedValue.Claims;
 
                 return result;
             }

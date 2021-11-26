@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using HotelMgtModel.Dtos.AuthDtos
+@using Microsoft.AspNetCore.Http;
+@using Newtonsoft.Json;
+@{
+    var loggedinUser = Context.Session.GetString("User");
+    var user = JsonConvert.DeserializeObject<AuthenticatedUserDto>(loggedinUser);
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -44,20 +52,11 @@
                                     <li class="nav-item"><a class="nav-link" href="blog-single.html">Blog Details</a></li>
                                 </ul>
                             </li> *@
-                            @*<li class="nav-item"><a class="nav-link" href="elements.html">Elemests</a></li>*@
                             <li class="nav-item"><a class="nav-link" asp-controller="ContactUs" asp-action="Index">Contact</a></li>
                             
                             @*<partial name="_AutthenticationView" />*@
-                            @if(ViewBag.LogInfo != null)
-                            {
-                                <li class="nav-item nav-link"><a href="#" class="nav-link">Welcome @ViewBag.Username</a></li>
-                                <li class="nav-item"><a class="nav-link" asp-action="Register" asp-controller="Authentication">Logout</a></li>
-                            }
-                            else
-                            {
-                                <li class="nav-item"><a class="nav-link" asp-action="Login" asp-controller="Authentication">Login</a></li>
-                                <li class="nav-item"><a class="nav-link" asp-action="Register" asp-controller="Authentication">Register</a></li>
-                            }
+                            <li class="nav-item">Welcome: @user.FullName <a class="nav-link" asp-action="Login" asp-controller="Authentication">Logout</a></li>
+                            
                         </ul>
                     </div> 
                 </nav>

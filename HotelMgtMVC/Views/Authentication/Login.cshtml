@@ -29,6 +29,8 @@
                 <a class="navbar-brand logo_h" asp-controller="Home" asp-action="Index"><img src="~/main/image/abim-hotel-logo.png" alt=""></a>
               </div>
               <p class="login-card-description">Sign into your account</p>
+              <div class="text-danger" asp-validation-summary="All"></div>
+
               <form method="post" asp-action="Login">
                   <div class="form-group">
                     <label for="Email" class="sr-only">Email</label>

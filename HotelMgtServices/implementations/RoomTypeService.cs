@@ -33,11 +33,19 @@ namespace HotelMgtServices.implementations
             return response.Data;
         }
 
+        public async Task<IEnumerable<AmenityDto>> GetAmenitiesForRoomTypeIdAsync(string roomTypeId)
+        {
+            var amenities = await _requestFactory.GetRequestAsync<Response<IEnumerable<AmenityDto>>>(requestUrl: $"api/amenities/roomtypeid/{roomTypeId}");
+
+            return amenities.Data;
+        }
+
         public async Task<RoomTypeDto> DeleteRoomTypeByIdAsync(string roomTypeId)
         {
             var response = await _requestFactory.GetRequestAsync<Response<RoomTypeDto>>(requestUrl: $"api/rooms/roomtypes/{roomTypeId}");
-
-            return response.Data;
+            if(response.Succeeded)
+                return response.Data;
+            return null;
         }
     }
 }
