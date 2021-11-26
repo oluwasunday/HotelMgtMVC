@@ -1,0 +1,22 @@
+﻿@using HotelMgtModel.Dtos.AuthDtos
+@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json
+
+@{
+    var loggedinUser = Context.Session.GetString("User");
+    var user = loggedinUser != null? JsonConvert.DeserializeObject<AuthenticatedUserDto>(loggedinUser) : null;
+
+    ViewData["Title"] = "Success Booking";
+
+    if(user == null)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_UserLayout.cshtml";
+    }
+} 
+
+<h1 style="color:#0b0;">Booking Successful!</h1>
+

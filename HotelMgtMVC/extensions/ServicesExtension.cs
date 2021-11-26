@@ -16,6 +16,8 @@ namespace HotelMgtMVC.extensions
             services.AddScoped<IRoomTypeService, RoomTypeService>();
             services.AddScoped<IRatingService, RatingService>();
             services.AddScoped<IRoomService, RoomService>();
+            services.AddScoped<IBookingService, BookingService>();
+            services.AddScoped<IUserService, UserService>();
 
 
             // Add Fluent Validator Injections Here

@@ -28,13 +28,29 @@ namespace HotelMgtMVC
 
             services.AddHttpContextAccessor(); // configure httpcontext to be accessible in other class
             services.AddHttpClient(); // configure httpclient for request to apis
-            services.AddSession();
+            services.AddDistributedMemoryCache();
+            services.AddSession(o => 
+                {
+                    o.IdleTimeout = TimeSpan.FromSeconds(1800);
+                });
 
             // add dependecy injection
             services.AddDependencyInjection();
 
 
-            services.ConfigureApplicationCookie(opt => opt.LoginPath = "/Authentication/Login");
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings  
+                options.LoginPath = "/Authentication/Login";
+                options.Cookie.Name = "HotelUser";
+                options.Cookie.HttpOnly = true;
+                options.LogoutPath = "/Authentication/Logout";
+                options.AccessDeniedPath = "/Authentication/AccessDenied";
+                //options.SlidingExpiration = true;
+                options.ReturnUrlParameter = "/Home/Index";
+                options.Cookie.Expiration = TimeSpan.FromDays(1);
+                options.ExpireTimeSpan = TimeSpan.FromDays(1);
+            });
 
         }
 

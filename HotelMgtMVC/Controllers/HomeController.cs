@@ -19,12 +19,18 @@ namespace HotelMgtMVC.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IRoomTypeService _roomTypeService;
         private readonly IRatingService _ratingService;
+        private readonly IUserService _userService;
 
-        public HomeController(ILogger<HomeController> logger, IRoomTypeService roomTypeService, IRatingService ratingService)
+        public HomeController(
+            ILogger<HomeController> logger, 
+            IRoomTypeService roomTypeService, 
+            IRatingService ratingService, 
+            IUserService userService)
         {
             _logger = logger;
             _roomTypeService = roomTypeService;
             _ratingService = ratingService;
+            _userService = userService;
         }
 
         public async Task<IActionResult> Index()
@@ -36,6 +42,12 @@ namespace HotelMgtMVC.Controllers
             var user = authenticatedUser != null ? JsonConvert.DeserializeObject<AuthenticatedUserDto>(authenticatedUser) : null;
 
             var homeVm = new HomeViewModel() { RoomTypes = roomTypes.ToList(), Ratings = ratings.ToList(), AuthUser = user};
+            foreach (var item in homeVm.Ratings)
+            {
+                var users = await _userService.GetUserByIdAsync(item.CustomerId);
+                item.AppUserName = users.FullName;
+                item.Avatar = users.Avatar;
+            }
             return View(homeVm);
         }
 
@@ -48,6 +60,13 @@ namespace HotelMgtMVC.Controllers
             var user = authenticatedUser != null ? JsonConvert.DeserializeObject<AuthenticatedUserDto>(authenticatedUser) : null;
 
             var homeVm = new HomeViewModel() { RoomTypes = roomTypes.ToList(), Ratings = ratings.ToList(), AuthUser = user };
+            foreach (var item in homeVm.Ratings)
+            {
+                var  users = await _userService.GetUserByIdAsync(item.CustomerId);
+                item.AppUserName = users.FullName;
+                item.Avatar = users.Avatar;
+            }
+
             return View(homeVm);
         }
 
