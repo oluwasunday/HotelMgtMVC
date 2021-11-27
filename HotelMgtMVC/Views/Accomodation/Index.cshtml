@@ -2,6 +2,7 @@
 @using HotelMgtModel.Dtos.AuthDtos
 @using Microsoft.AspNetCore.Http;
 @using Newtonsoft.Json;
+@using System.Globalization
 
 @{
     var loggedinUser = Context.Session.GetString("User");
@@ -52,7 +53,7 @@
                             <a asp-controller="Accomodation" asp-action="RoomDetails" asp-route-roomTypeId="@item.Id" class="btn theme_btn button_hover">Details</a>
                         </div>
                         <a asp-controller="Accomodation" asp-action="RoomDetails" asp-route-roomTypeId="@item.Id"><h4 class="sec_h4">@item.Name</h4></a>
-                        <h5>N@{@item.Price.ToString("N0")}<small>/night</small></h5>
+                        <h5>@item.Price.ToString("C", CultureInfo.GetCultureInfo("en-NG"))<small>/night</small></h5>
                     </div>
                 </div>
             }
@@ -80,7 +81,7 @@
                             <a href="#" class="btn theme_btn button_hover">Book Now</a>
                         </div>
                         <a href="#"><h4 class="sec_h4">ROOM NO: @item.RoomNo</h4></a>
-                        <h5>N@{@item.Price.ToString("N0")}<small>/night</small></h5>
+                        <h5>@item.Price.ToString("C", CultureInfo.GetCultureInfo("en-NG"))<small>/night</small></h5>
                     </div>
                 </div>
             }
