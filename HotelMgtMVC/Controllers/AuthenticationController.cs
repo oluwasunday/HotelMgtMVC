@@ -85,7 +85,7 @@ namespace HotelMgtMVC.Controllers
                 {
                     ViewBag.LogInfo = new { userId = result.Id, email = result.Email, name = $"{user.FirstName} {user.LastName}" };
                     ViewBag.Username = $"{user.FirstName} {user.LastName}";
-                    return RedirectToAction("Dashboard", "Home", ViewBag.LogInfo);//, new { userId = result.Id, email = result.Email, name = $"{user.FirstName} {user.LastName}" });
+                    return RedirectToAction("Index", "Accomodation", ViewBag.LogInfo);//, new { userId = result.Id, email = result.Email, name = $"{user.FirstName} {user.LastName}" });
                 }
             }
             ViewBag.Error = "Error occur, pls check all required fields and try again";

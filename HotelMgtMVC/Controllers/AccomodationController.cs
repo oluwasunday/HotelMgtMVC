@@ -1,4 +1,5 @@
-﻿using HotelMgtModel.ViewModels;
+﻿using HotelMgtModel.Dtos;
+using HotelMgtModel.ViewModels;
 using HotelMgtMVC.Dtos;
 using HotelMgtServices.interfaces;
 using Microsoft.AspNetCore.Http;
@@ -27,6 +28,8 @@ namespace HotelMgtMVC.Controllers
             var rooms = await _roomService.GetRoomsAsync();
 
             var accVm = new AccomodationViewModel() { RoomTypes = roomTypes.ToList(), Rooms = rooms.ToList()};
+
+            ViewBag.Success = TempData["success"];
             return View(accVm);
         }
 
@@ -37,6 +40,7 @@ namespace HotelMgtMVC.Controllers
             var amenities = await _roomTypeService.GetAmenitiesForRoomTypeIdAsync(roomTypeId);
 
             var accVm = new RoomTypeDetailsViewModel() { RoomType = roomType, Rooms = rooms.ToList(), Amenities = amenities.ToList() };
+            
             return View(accVm);
         }
 
@@ -66,6 +70,26 @@ namespace HotelMgtMVC.Controllers
         public IActionResult SuccessBooking()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Rating(AddRatingsDto ratingsDto)
+        {
+            var user = HttpContext.Session.GetString("User");
+            if (user == null)
+                return RedirectToAction("Login", "Authentication");
+
+            var book = await _bookingService.RateAsync(ratingsDto);
+            if (book.Succeeded)
+            {
+                ViewBag.Success = "Successful";
+                TempData["success"] = "Successfully rated";
+                return Redirect("Index");
+            }
+
+            ViewBag.Error = book.Message;
+            ModelState.AddModelError(string.Empty, book.Message);
+            return Redirect("Index");
         }
     }
 }
