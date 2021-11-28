@@ -9,6 +9,10 @@
     var user = loggedinUser != null? JsonConvert.DeserializeObject<AuthenticatedUserDto>(loggedinUser) : null;
 
     ViewData["Title"] = "Home";
+    var rate = @Model.Ratings.Count();
+    var ave = @Model.Ratings.Select(x => x.Ratings).Average();
+    int fullRateAve = (int)ave;
+    double halfRateAve = ave - fullRateAve;
 
     if(user == null)
     {
@@ -29,12 +33,47 @@
 						<h6>Welcome To </h6>
 						<h2>Abim Int'l' Hotel</h2>
 						<p>If you are looking for a comfortable abode while you on away from, we have them in ranges<br>. We make you at home.</p>
-						<a href="#" class="btn theme_btn button_hover">Get Started</a>
+						@*<a href="#" class="btn theme_btn button_hover">Get Started</a>*@
 					</div>
 				</div>
             </div>
+
+            <!-- ========== Rating section ========= -->
             <div class="hotel_booking_area position">
-                
+                <div class="container">
+                    <div class="row ">
+                        <div class="hotel_booking_table col-md-9 m-auto">
+                            <div class="col-md-3">
+                                <h2>Customer<br> Ratings</h2>
+                            </div>
+                            <div class="col-md-9 col-lg-9 col-sm-12">
+
+                                <div>
+                                    <div class="row">
+                                    
+                                        <div class="col-md-9" style="display:flex; align-content:space-between">
+                                            <div class="book_tabel_item">
+                                                <div class="input-group">
+                                                    <h3>@ave.ToString("0.#") from @rate customers</h3>
+                                                </div>
+                                                <div class="input-group">
+                                                    @for(int i = 0; i < @fullRateAve; i ++)
+                                                    {
+                                                        <i class="fa fa-star"></i>
+                                                    }
+                                                    @if(halfRateAve > 0){
+                                                        <i class="fa fa-star-half-o"></i>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
         <!--================Banner Area =================-->

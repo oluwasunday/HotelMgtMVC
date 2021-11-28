@@ -1,4 +1,5 @@
-﻿using HotelMgtModel.Utilities;
+﻿using HotelMgtModel.Dtos;
+using HotelMgtModel.Utilities;
 using HotelMgtMVC.Dtos;
 using HotelMgtServices.interfaces;
 using System;
@@ -21,6 +22,12 @@ namespace HotelMgtServices.implementations
         public async Task<Response<BookingResponseDto>> BookAsync(AddBookingDto bookingDto)
         {
             var result = await _requestFactory.PostRequestAsync<AddBookingDto, Response<BookingResponseDto>>("/api/Booking/create-booking", bookingDto);
+            return result;
+        }
+
+        public async Task<Response<AddRatingResponseDto>> RateAsync(AddRatingsDto ratingsDto)
+        {
+            var result = await _requestFactory.PostRequestAsync<AddRatingsDto, Response<AddRatingResponseDto>>("/api/customers/ratings", ratingsDto);
             return result;
         }
     }
