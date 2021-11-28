@@ -63,6 +63,49 @@
 </section>
 <!--================ Accomodation Area  =================-->
 
+
+
+    <div class="container m-auto">
+        <div class="section_title text-center">
+            <h2 class="title_color">Rate Our Hotel</h2>
+            <p>We appreciate your kind feedback</p><br />
+            
+            <div class="row m-auto">
+                <div style="margin:auto;">
+                    <div class="text-danger" asp-validation-summary="All"></div>
+                    @if(@ViewBag.Success != null)
+                    {
+                        <h3 style="color:green">@ViewBag.Success</h3>
+                    }
+                    <form method="post" asp-action="Rating" asp-controller="Accomodation">
+
+                        <div>
+                            <label for="rating">Rate Value</label>
+                            <select name="Ratings" style="width:100%; float:none;"  class="form-control wide">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option selected value="5">5</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Comments</label>
+                           <textarea class="form-control" name="Comment"cols="35" rows="3" required ></textarea>
+                        </div>
+                
+                        <input type="submit" value="Submit Rating" class="btn btn-dark" />
+                    </form>
+
+                </div>
+            </div>
+           
+        </div>
+    </div>
+
+
+
 <!--================ Accomodation Area  =================-->
 <section class="accomodation_area section_gap" style="padding-top:1px;">
     <div class="container">
